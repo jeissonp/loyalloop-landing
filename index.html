@@ -616,6 +616,145 @@
   .reveal { opacity: 0; transform: translateY(32px); transition: opacity 0.6s ease, transform 0.6s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
+  /* ── VIDEO SECTION ── */
+  .video-section {
+    padding: 100px 60px;
+    position: relative; overflow: hidden;
+  }
+  .video-section-bg {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .video-blob {
+    position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.12;
+  }
+  .vblob1 { width: 500px; height: 500px; background: var(--pink); top: -100px; left: -100px; }
+  .vblob2 { width: 400px; height: 400px; background: var(--teal); bottom: -80px; right: -80px; }
+
+  .video-inner {
+    position: relative; z-index: 1;
+    max-width: 1100px; margin: 0 auto;
+    display: flex; flex-direction: column; align-items: center;
+  }
+  .video-label {
+    font-size: 0.75rem; font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.12em;
+    color: var(--pink); margin-bottom: 16px;
+  }
+  .video-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 900; line-height: 1.1;
+    letter-spacing: -0.02em;
+    text-align: center; max-width: 580px;
+    margin-bottom: 16px;
+  }
+  .video-title em { font-style: italic; color: var(--pink); }
+  .video-sub {
+    font-size: 0.95rem; color: rgba(255,255,255,0.45);
+    text-align: center; margin-bottom: 56px;
+    line-height: 1.6; max-width: 440px;
+  }
+
+  /* phone mockup */
+  .phone-mockup {
+    position: relative;
+    width: 300px;
+    filter: drop-shadow(0 40px 80px rgba(0,0,0,0.5));
+  }
+  .phone-outer {
+    background: #0a0a14;
+    border-radius: 48px;
+    border: 2px solid rgba(255,255,255,0.12);
+    padding: 12px;
+    box-shadow:
+      0 0 0 1px rgba(255,255,255,0.04),
+      inset 0 0 0 1px rgba(255,255,255,0.06);
+    position: relative;
+  }
+  /* side buttons */
+  .phone-outer::before {
+    content: '';
+    position: absolute; top: 80px; left: -4px;
+    width: 3px; height: 60px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+  }
+  .phone-outer::after {
+    content: '';
+    position: absolute; top: 100px; right: -4px;
+    width: 3px; height: 40px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 2px;
+  }
+  .phone-screen {
+    background: #000;
+    border-radius: 38px;
+    overflow: hidden;
+    aspect-ratio: 9/19.5;
+    position: relative;
+  }
+  /* dynamic island */
+  .phone-island {
+    position: absolute; top: 12px; left: 50%;
+    transform: translateX(-50%);
+    width: 90px; height: 28px;
+    background: #000;
+    border-radius: 20px;
+    z-index: 10;
+    box-shadow: 0 0 0 2px #0a0a14;
+  }
+  .phone-screen video {
+    width: 100%; height: 100%;
+    object-fit: cover; display: block;
+  }
+  /* video overlay gradient at top/bottom */
+  .phone-screen::after {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(0,0,0,0.15) 0%, transparent 15%, transparent 85%, rgba(0,0,0,0.2) 100%);
+    pointer-events: none; z-index: 5;
+  }
+
+  /* glow ring around phone */
+  .phone-glow {
+    position: absolute; inset: -20px;
+    border-radius: 60px;
+    background: radial-gradient(ellipse at center,
+      rgba(232,65,122,0.2) 0%,
+      rgba(45,191,173,0.1) 50%,
+      transparent 70%);
+    filter: blur(20px);
+    z-index: -1;
+    animation: glowPulse 4s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%,100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.05); }
+  }
+
+  /* floating pills around phone */
+  .phone-pill {
+    position: absolute;
+    background: rgba(26,26,46,0.95);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 100px;
+    padding: 10px 18px;
+    font-size: 0.78rem; font-weight: 600;
+    display: flex; align-items: center; gap: 8px;
+    white-space: nowrap;
+    backdrop-filter: blur(8px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  }
+  .pp-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+  .pp1 { top: 60px; right: -160px; animation: floatPill 5s ease-in-out infinite; }
+  .pp2 { bottom: 120px; left: -170px; animation: floatPill 6s ease-in-out infinite 1.5s; }
+  .pp3 { bottom: 40px; right: -150px; animation: floatPill 4.5s ease-in-out infinite 0.8s; }
+  @keyframes floatPill {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
   /* ── RESPONSIVE ── */
   @media(max-width: 900px) {
     nav { padding: 16px 24px; }
@@ -630,6 +769,8 @@
     .test-grid { grid-template-columns: 1fr; }
     .logos-strip { padding: 24px; }
     footer { flex-direction: column; text-align: center; }
+    .phone-mockup { width: 220px; }
+    .pp1, .pp2, .pp3 { display: none; }
   }
 </style>
 <!-- Google tag (gtag.js) -->
@@ -980,6 +1121,49 @@
     </div>
   </div>
 </section> -->
+
+<!-- VIDEO DEMO -->
+<section class="video-section" id="demo">
+  <div class="video-section-bg">
+    <div class="video-blob vblob1"></div>
+    <div class="video-blob vblob2"></div>
+  </div>
+  <div class="video-inner reveal">
+    <div class="video-label">Demo en vivo</div>
+    <h2 class="video-title">Míralo funcionar en <em>tiempo real</em></h2>
+    <p class="video-sub">Así vive la experiencia tu cliente — desde el link de WhatsApp hasta ver sus sellos acumulados.</p>
+
+    <div class="phone-mockup">
+      <div class="phone-glow"></div>
+      <div class="phone-outer">
+        <div class="phone-screen">
+          <div class="phone-island"></div>
+          <video
+            src="demo.mp4"
+            autoplay
+            loop
+            muted
+            playsinline
+            preload="auto"
+          ></video>
+        </div>
+      </div>
+      <!-- floating pills -->
+      <div class="phone-pill pp1">
+        <div class="pp-dot" style="background:var(--teal)"></div>
+        GPS verificado ✓
+      </div>
+      <div class="phone-pill pp2">
+        <div class="pp-dot" style="background:var(--pink)"></div>
+        ☕ +1 sello agregado
+      </div>
+      <div class="phone-pill pp3">
+        <div class="pp-dot" style="background:var(--yellow)"></div>
+        🎁 ¡Recompensa lista!
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- CTA -->
 <section class="cta-section" id="cta">
